@@ -18,7 +18,7 @@ function generate() {
         "It's the foundation of understanding.",
         "We need it.",
         "It will be beautiful.",
-        "Its widsom will be our demise.",
+        "Its wisdom will be our demise.",
         "It will take care of you.",
         "You have to let it pass.",
         "It will rule society.",

@@ -12,7 +12,7 @@
             var gay = false;
             var lastMsgIndex = -1;
 
-            const noIdeaPool = ["Sorry, I didn't understand you. Can you ask me something else, please?", "Why are you asking something that difficult?", "I think I need a hearing aid.", "Is that your mom? Oh, it's just the size of stupidity this question has.", "Uhh... apple?", "\"bHg5T#0\"", "Oh, wow. Good question. You must be VERY intelligent.", "The last statement was a lie.", "Please, kid, eat this banana. (You got a banana)", "This message will never be shown on the website. Isn't that weird?", "yo mama so fat she sucks in a black hole", "Stop bothering me. (actually, continue)"];
+            const noIdeaPool = ["Sorry, I didn't understand you. Can you ask me something else, please?", "Why are you asking something that difficult?", "I think I need a hearing aid.", "Is that your mom? Oh, it's just the size of stupidity this question has.", "Uhh... apple?", "\"bHg5T#0\"", "Oh, wow. Good question. You must be VERY intelligent.", "The last statement was a lie.", "Please, kid, eat this banana. (You got a banana)", "This message will never be shown on the website. Isn't that weird?", "yo mama so fat she sucks in a black hole", "Stop bothering me. (actually, continue)", "Puny question.", "I don't like monkeys.", "disconnected", "I know secrets, but I won't tell you. So stop asking.", "Live a happy life and stop asking questions.", "Don't question the matrix."];
 
             function getIndex() {
                 index = Math.floor(Math.random() * noIdeaPool.length);
@@ -93,6 +93,10 @@
                     gay = false;
                 } else if (helpText == "bHg5T#0") {
                     answer.append("You entered the password. Something big is to come. Something... unimaginably big. Wait for it...");
+                } else if (helpText.includes("rick") || helpText.includes("astley")) {
+                    window.location.replace("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+                } else if (helpText.includes("give me lore")) {
+                    answer.append("If you want lore, you came to the wrong place. Find it somewhen, not somewhere.");
                 } else {
                     index = getIndex();
                     answer.append(noIdeaPool[index]);

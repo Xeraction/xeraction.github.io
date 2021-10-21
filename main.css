@@ -15,19 +15,16 @@ html, body {
 }
 #field {
     background-color: white;
+    padding-bottom: 15px;
     position: relative;
     width: 70%;
-    height: 50%;
-    box-sizing: content-box;
+    height: 70%;
+    overflow-y: scroll;
+    overflow-x: hidden;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, .5);
     border-radius: 5px;
     overflow-wrap: break-word;
     word-wrap: break-word;
-}
-#field:after {
-    content: "";
-    padding-bottom: 100%;
-    display: block;
 }
 #text-content {
     position: absolute;
@@ -56,6 +53,40 @@ html, body {
     left: 0;
     background-color: rgb(255,255,100);
 }
+#button {
+    position: relative;
+    padding: 15px;
+    width: 100px;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: helvetica;
+    color: black;
+    border-radius: 5px;
+    border-color: rgb(47, 47, 48);
+    border-style: solid;
+    cursor: pointer;
+    background-color: white;
+}
+#buttona {
+    position: relative;
+    padding: 15px;
+    width: 100px;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: helvetica;
+    color: black;
+    border-radius: 5px;
+    border-color: rgb(129, 252, 104);
+    border-style: solid;
+    cursor: pointer;
+    background-color: white;
+}
+#button:hover {
+    background-color: rgb(255, 255, 100);
+}
+#buttona:hover {
+    background-color: rgb(186, 255, 173);
+}
 #home {
     top: 20px;
 }
@@ -65,11 +96,14 @@ html, body {
 #mccg {
     top: 140px;
 }
-#contact {
+#quiz {
     top: 200px;
 }
-#help {
+#contact {
     top: 260px;
+}
+#help {
+    top: 320px;
 }
 
 .shaking {

@@ -1,50 +1,50 @@
 var frame = document.getElementById("text-content");
 var storage = window.localStorage;
 
-const currentLength = 72;
-const allMobs = 72;
+const modeLength = ["72"];
 
 const nameTheMobAnswers = ["horse", "evoker", "iron golem", "mule", "wandering trader", "enderman", "hoglin", "endermite", "guardian", "elder guardian", "donkey", "phantom", "slime", "cave spider", "villager", "turtle", "drowned", "zombie villager", "killer bunny", "vindicator", "wolf", "polar bear", "ocelot", "strider", "witch", "wither", "zombie horse", "blaze", "illusioner", "rabbit", "sheep", "tropical fish", "stray", "vex", "ender dragon", "piglin brute", "parrot", "bee", "llama", "wither skeleton", "axolotl", "fox", "snow golem", "zoglin", "cow", "pufferfish", "mooshroom", "zombified piglin", "silverfish", "creeper", "pillager", "shulker", "zombie", "husk", "salmon", "glow squid", "piglin", "cat", "skeleton horse", "magma cube", "spider", "ghast", "skeleton", "panda", "squid", "bat", "dolphin", "goat", "chicken", "ravager", "pig", "cod"];
 
 var completed = [];
 
-var currentMode = 0;
-var currentLevel = 0;
-
 //switcheroos
 var wrong = false;
 var right = false;
 
-var save = "";
-
-function saveData() {
-    save = "";
-    for (var i = 0; i <= currentLength; i++) {
-        save += completed[i] ? "1" : "0";
+function saveData(mode) {
+    if (mode == 0) return;
+    var save = "";
+    var comp = completed[mode - 1];
+    for (var i = 0; i < comp.length; i++) {
+        save += comp[i] ? "1" : "0";
     }
-    storage.setItem("quizSave", save);
-    console.log(save);
+    storage.setItem("quiz" + mode, save);
+    console.log("Saved: " + save);
 }
 
-function loadData() {
-    save = "";
-    if (storage.getItem("quizSave")) save = storage.getItem("quizSave");
+function loadData(mode) {
+    if (mode == 0) return;
+    var save = "";
+    var length = modeLength[mode - 1];
+    if (storage.getItem("quiz" + mode)) save = storage.getItem("quiz" + mode);
     else {
-        for (var i = 0; i <= currentLength; i++) save += "0";
+        for (var i = 0; i < length; i++) save += "0";
     }
-    if (save.length <= currentLength) {
-        var missingLength = currentLength - save.length;
+    if (save.length <= length) {
+        var missingLength = length - save.length;
         for (var i = 0; i < missingLength; i++) save += "0";
     }
-    for (var i = 0; i <= currentLength; i++) {
-        completed[i] = save.charAt(i) == "1";
+    var temp = [];
+    for (var i = 0; i < length; i++) {
+        temp[i] = save.charAt(i) == "1";
     }
-    console.log(save);
+    completed[mode - 1] = temp;
+    console.log("Loaded: " + save);
 }
 
 function deleteData() {
     if (window.confirm("Are you sure you want to delete your entire Quiz Data? All your progress will be lost!")) {
-        storage.removeItem("quizSave");
+        storage.removeItem("quiz1");
         main();
     }
 }
@@ -65,14 +65,10 @@ const mainHTML = "<h1>Quizzes</h1>" +
 const minecraftHTML = "<h1>Minecraft Quizzes</h1>" +
     "<p>Here you will find a collection of Minecraft themed quizzes, all with different topics.<br>" +
     "Click on one of the buttons below to get started!</p><br><br>" +
-    "<a id=\"button\" onclick=\"loadNameMob()\">Name the Mob</a>&nbsp;&nbsp;&nbsp;&nbsp;" +
+    "<a id=\"button\" onclick=\"loadNameMob(0)\">Name the Mob</a>&nbsp;&nbsp;&nbsp;&nbsp;" +
     "<br><br><br><br><br><br><a id=\"button\" onclick=\"loadNew(mainHTML)\">Back</a>";
 
-const nameTheMobHTML = "<h1>Name the Mob</h1>" +
-    "<p>Do you know the name of the shown mob? Type it in the textbox underneath the picture and press check!</p><br><br>";
-
 function loadNew(thing) {
-    saveData();
     resetSwitcheroos();
     thing += "<div style=\"clear:both;\"></div>";
     frame.innerHTML = "";
@@ -80,23 +76,14 @@ function loadNew(thing) {
 }
 
 function isCompleted(mode, level) {
-    var start = 0;
-    switch (mode) {
-        case 1: start = 0; break;
-        case 2: start = 100; break;
-        default: start = 0; break;
-    }
-    return completed[start + level];
+    var comp = completed[mode - 1];
+    return comp[level - 1];
 }
 
 function complete(mode, level) {
-    var start = 0;
-    switch (mode) {
-        case 1: start = 0; break;
-        case 2: start = 100; break;
-        default: start = 0; break;
-    }
-    completed[start + level] = true;
+    var comp = completed[mode - 1];
+    comp[level - 1] = true;
+    completed[mode - 1] = comp;
 }
 
 function loadQuiz(mode, level) {
@@ -107,7 +94,7 @@ function loadQuiz(mode, level) {
         thing += "<img src=\"assets/mcmobs/" + level + ".png\" alt=\"Error\"><br><br><br>";
         thing += "<input type=\"text\" id=\"input\"><br><br><br>";
         thing += "<a id=\"button\" onclick=\"checkAnswer(1, " + level + ")\">Check</a>&nbsp;&nbsp;";
-        thing += "<a id=\"button\" onclick=\"loadNameMob()\">Back</a>";
+        thing += "<a id=\"button\" onclick=\"loadNameMob(1)\">Back</a>";
     }
     loadNew(thing);
 }
@@ -136,9 +123,14 @@ function checkAnswer(mode, level) {
     }
 }
 
-function loadLevels(title, subtitle, mode, levelCount) {
+function loadLevels(title, subtitle, mode, levelCount, previous) {
+    if (previous == mode) saveData(previous);
+    else {
+        saveData(previous);
+        loadData(mode);
+    }
     var thing = "<h1>" + title + "</h1><p>" + subtitle + "</p><br>";
-    if (mode == 1) thing += "<a id=\"button\" onclick=\"loadNew(minecraftHTML)\">Back</a><br><br><br>";
+    if (mode == 1) thing += "<a id=\"button\" onclick=\"loadNew(minecraftHTML, 1)\">Back</a><br><br><br>";
     var part = "";
     var tens = 0;
     for (var i = 0; i < levelCount; i++) {
@@ -153,12 +145,11 @@ function loadLevels(title, subtitle, mode, levelCount) {
     loadNew(thing);
 }
 
-function loadNameMob() {
-    loadLevels("Name the Mob", "Do you know the name of the shown mob? Type it in the textbox underneath the picture and press check!", 1, 72);
+function loadNameMob(previous) {
+    loadLevels("Name the Mob", "Do you know the name of the shown mob? Type it in the textbox underneath the picture and press check!", 1, 72, previous);
 }
 
 function main() {
-    loadData();
     loadNew(mainHTML);
 }
 

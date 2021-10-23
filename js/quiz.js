@@ -19,7 +19,6 @@ function saveData(mode) {
         save += comp[i] ? "1" : "0";
     }
     storage.setItem("quiz" + mode, save);
-    console.log("Saved: " + save);
 }
 
 function loadData(mode) {
@@ -39,7 +38,6 @@ function loadData(mode) {
         temp[i] = save.charAt(i) == "1";
     }
     completed[mode - 1] = temp;
-    console.log("Loaded: " + save);
 }
 
 function deleteData() {
@@ -65,7 +63,7 @@ const mainHTML = "<h1>Quizzes</h1>" +
 const minecraftHTML = "<h1>Minecraft Quizzes</h1>" +
     "<p>Here you will find a collection of Minecraft themed quizzes, all with different topics.<br>" +
     "Click on one of the buttons below to get started!</p><br><br>" +
-    "<a id=\"button\" onclick=\"loadNameMob(0)\">Name the Mob</a>&nbsp;&nbsp;&nbsp;&nbsp;" +
+    "<a id=\"button\" onclick=\"loadNameMob()\">Name the Mob</a>&nbsp;&nbsp;&nbsp;&nbsp;" +
     "<br><br><br><br><br><br><a id=\"button\" onclick=\"loadNew(mainHTML)\">Back</a>";
 
 function loadNew(thing) {
@@ -84,6 +82,7 @@ function complete(mode, level) {
     var comp = completed[mode - 1];
     comp[level - 1] = true;
     completed[mode - 1] = comp;
+    saveData(mode);
 }
 
 function loadQuiz(mode, level) {
@@ -94,7 +93,7 @@ function loadQuiz(mode, level) {
         thing += "<img src=\"assets/mcmobs/" + level + ".png\" alt=\"Error\"><br><br><br>";
         thing += "<input type=\"text\" id=\"input\"><br><br><br>";
         thing += "<a id=\"button\" onclick=\"checkAnswer(1, " + level + ")\">Check</a>&nbsp;&nbsp;";
-        thing += "<a id=\"button\" onclick=\"loadNameMob(1)\">Back</a>";
+        thing += "<a id=\"button\" onclick=\"loadNameMob()\">Back</a>";
     }
     loadNew(thing);
 }
@@ -123,18 +122,14 @@ function checkAnswer(mode, level) {
     }
 }
 
-function loadLevels(title, subtitle, mode, levelCount, previous) {
-    if (previous == mode) saveData(previous);
-    else {
-        saveData(previous);
-        loadData(mode);
-    }
+function loadLevels(title, subtitle, mode, levelCount) {
+    loadData(mode);
     var thing = "<h1>" + title + "</h1><p>" + subtitle + "</p><br>";
-    if (mode == 1) thing += "<a id=\"button\" onclick=\"loadNew(minecraftHTML, 1)\">Back</a><br><br><br>";
+    if (mode == 1) thing += "<a id=\"button\" onclick=\"loadNew(minecraftHTML)\">Back</a><br><br><br>";
     var part = "";
     var tens = 0;
     for (var i = 0; i < levelCount; i++) {
-        part += "<a id=\"button" + (isCompleted(1, i + 1) ? "a" : "") + "\" onclick=\"loadQuiz(1, " + (i + 1) + ")\">Level " + (i + 1) + "</a>&nbsp;&nbsp;";
+        part += "<a id=\"button" + (isCompleted(mode, i + 1) ? "a" : "") + "\" onclick=\"loadQuiz(" + mode + ", " + (i + 1) + ")\">Level " + (i + 1) + "</a>&nbsp;&nbsp;";
         tens++;
         if (tens == 10) {
             part += "<br><br><br>";
@@ -145,8 +140,8 @@ function loadLevels(title, subtitle, mode, levelCount, previous) {
     loadNew(thing);
 }
 
-function loadNameMob(previous) {
-    loadLevels("Name the Mob", "Do you know the name of the shown mob? Type it in the textbox underneath the picture and press check!", 1, 72, previous);
+function loadNameMob() {
+    loadLevels("Name the Mob", "Do you know the name of the shown mob? Type it in the textbox underneath the picture and press check!", 1, 72);
 }
 
 function main() {

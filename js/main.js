@@ -1,3 +1,7 @@
+function isOverflowing(element) {
+    return element.clientWidth < element.scrollWidth || element.clientHeight < element.scrollHeight;
+}
+
 function openNav() {
     document.getElementById("sidenav").style.width = "222px";
 }
@@ -19,4 +23,18 @@ function addNav() {
     frame.insertAdjacentHTML("beforeend", thing);
 }
 
-window.onload = addNav();
+function main() {
+    addNav();
+    var field = document.getElementById("field");
+    if (isOverflowing(field)) field.style.overflowY = "scroll";
+    else field.style.overflowY = "hidden";
+
+    //yoinked from colon's furry site
+    let observer = new MutationObserver(mutation => {
+        if (isOverflowing(field)) field.style.overflowY = "scroll";
+        else field.style.overflow = "hidden";
+    });
+    observer.observe(document.getElementById("text-content"), {childList: true, subtree: true, attributes: true, characterData: true});
+}
+
+window.onload = main();

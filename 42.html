@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>42</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Do you like the number 42? Then play this totally original minigame!">
+        <meta name="author" content="Xeraction">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <div id="sidenav"></div>
+        <a id="opensidenav" onclick="openNav()">&#9776;</a>
+        <div id="content">
+            <div id="field">
+                <div id="text-content">
+                    <h1>42</h1>
+                    <p>42 is a totally original minigame I came up with, because everyone loves the number 42.</p>
+                    <p>The goal of this minigame is to get the number 42.<br>At the start of each round, a random number gets selected where you have to start from.<br>By clicking the buttons below, you can increment or decrement the number.</p>
+                    <p>Your best time gets saved so you can flex on your friends!</p>
+                    <p id="pb">Personal best: --</p>
+                    <div id="game">
+                        <br><br><a id="button" onclick="startGame()">Start</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="js/main.js"></script>
+        <script src="js/42.js"></script>
+    </body>
+</html>

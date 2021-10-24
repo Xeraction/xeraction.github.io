@@ -106,7 +106,7 @@ html, body {
     font-weight: bold;
 }
 
-#button {
+#button, .button {
     position: relative;
     padding: 15px;
     width: 100px;
@@ -136,12 +136,16 @@ html, body {
     background-color: white;
 }
 
-#button:hover {
+#button:hover, .button:hover {
     background-color: rgb(255, 255, 100);
 }
 
 #buttona:hover {
     background-color: rgb(186, 255, 173);
+}
+
+#randNum {
+    font-size: 42px;
 }
 
 .shaking {

@@ -20,6 +20,7 @@ function addNav() {
     thing += "<a href=\"./help.html\" id=\"sidelink\">Help</a><br><br>";
     thing += "<a id=\"sidecat\">Projects</a>";
     thing += "<a href=\"./quiz.html\" id=\"sidelink\">Quiz</a>";
+    thing += "<a href=\"./42.html\" id=\"sidelink\">42</a>";
     frame.insertAdjacentHTML("beforeend", thing);
 }
 

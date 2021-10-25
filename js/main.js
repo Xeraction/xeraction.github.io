@@ -10,12 +10,19 @@ function closeNav() {
     document.getElementById("sidenav").style.width = "0px";
 }
 
+function readNews() {
+    localStorage.setItem("news", news);
+    document.getElementById("sidelinknews").classList.remove("la");
+    document.getElementById("sidelinknews").classList.add("na");
+}
+
 function addNav() {
     var frame = document.getElementById("sidenav");
     var thing = "";
     thing += "<a id=\"closesidenav\" onclick=\"closeNav()\">&times;</a>";
     thing += "<a href=\"./index.html\" id=\"sidelink\">Home</a>";
     thing += "<a href=\"./about.html\" id=\"sidelink\">About</a>";
+    thing += "<a href=\"./news.html\" id=\"sidelink\">News</a>";
     thing += "<a href=\"./contact.html\" id=\"sidelink\">Contact</a>";
     thing += "<a href=\"./help.html\" id=\"sidelink\">Help</a><br><br>";
     thing += "<a id=\"sidecat\">Projects</a>";

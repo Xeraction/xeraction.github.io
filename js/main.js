@@ -18,17 +18,35 @@ function readNews() {
 
 function addNav() {
     var frame = document.getElementById("sidenav");
-    var thing = "";
-    thing += "<a id=\"closesidenav\" onclick=\"closeNav()\">&times;</a>";
-    thing += "<a href=\"./index.html\" id=\"sidelink\">Home</a>";
-    thing += "<a href=\"./about.html\" id=\"sidelink\">About</a>";
-    thing += "<a href=\"./news.html\" id=\"sidelink\">News</a>";
-    thing += "<a href=\"./contact.html\" id=\"sidelink\">Contact</a>";
-    thing += "<a href=\"./help.html\" id=\"sidelink\">Help</a><br><br>";
-    thing += "<a id=\"sidecat\">Projects</a>";
-    thing += "<a href=\"./quiz.html\" id=\"sidelink\">Quiz</a>";
-    thing += "<a href=\"./42.html\" id=\"sidelink\">42</a>";
+    var thing = '';
+    thing += '<a id="closesidenav" onclick="closeNav()">&times;</a>';
+    thing += '<a onclick="redirect(\'index\')" id="sidelink">Home</a>';
+    thing += '<a onclick="redirect(\'about\')" id="sidelink">About</a>';
+    thing += '<a onclick="redirect(\'news\')" id="sidelink">News</a>';
+    thing += '<a onclick="redirect(\'contact\')" id="sidelink">Contact</a>';
+    thing += '<a onclick="redirect(\'help\')" id="sidelink">Help</a><br><br>';
+    thing += '<a id="sidecat">Projects</a>';
+    thing += '<a onclick="redirect(\'quiz\')" id="sidelink">Quiz</a>';
+    thing += '<a onclick="redirect(\'42\')" id="sidelink">42</a>';
     frame.insertAdjacentHTML("beforeend", thing);
+}
+
+function redirect(page) {
+    var path = window.location.pathname;
+    var currentPage = path.split("/").pop();
+    var projectPage = false;
+    if (currentPage == "quiz.html" || currentPage == "42.html" || currentPage == "gol.html") projectPage = true;
+    switch (page) {
+        case "index":
+        case "about":
+        case "news":
+        case "contact":
+        case "help": window.location.assign("." + (projectPage ? "." : "") + "/" + page + ".html"); console.log(projectPage); break;
+        case "quiz":
+        case "42":
+        case "gol": window.location.assign("." + (projectPage ? "" : "/projects") + "/" + page + ".html"); console.log(projectPage); break;
+        default: window.location.replace("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+    }
 }
 
 function main() {

@@ -90,7 +90,7 @@ function loadQuiz(mode, level) {
     if (mode == 1) {
         thing += "<h1>Name the Mob</h1>";
         thing += "<h3>Level " + level + "</h3>";
-        thing += "<img src=\"assets/mcmobs/" + level + ".png\" alt=\"Error\"><br><br><br>";
+        thing += "<img src=\"../assets/mcmobs/" + level + ".png\" alt=\"Error\"><br><br><br>";
         thing += "<input type=\"text\" id=\"input\"><br><br><br>";
         thing += "<a id=\"button\" onclick=\"checkAnswer(1, " + level + ")\">Check</a>&nbsp;&nbsp;";
         thing += "<a id=\"button\" onclick=\"loadNameMob()\">Back</a>";

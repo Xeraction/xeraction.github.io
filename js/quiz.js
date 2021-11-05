@@ -101,9 +101,25 @@ function loadQuiz(mode, level) {
 function checkAnswer(mode, level) {
     var input = document.getElementById("input").value;
     if (input == "") return;
+    input = input.toLowerCase();
+    console.log(input);
+    input += "\n";
+    var start = 0;
+    for (var i = 0; i < input.length; i++) {
+        if (input.charAt(i) == ' ') start ++;
+        else break;
+    }
+    input = input.substring(start, input.length);
+    var end = input.length - 1;
+    for (var i = input.length - 2; i > 0; i--) {
+        if (input.charAt(i) == ' ') end--;
+        else break;
+    }
+    input = input.substring(0, end);
+    console.log(input);
     if (mode == 1) {
         var answer = nameTheMobAnswers[level - 1];
-        if (input.toLowerCase() === answer) {
+        if (input === answer) {
             if (!right) {
                 if (wrong) document.getElementById("wrong").outerHTML = "";
                 frame.insertAdjacentHTML("beforeend", "<p id=\"right\" style=\"color:green;font-size:30px;\">RIGHT</p>");

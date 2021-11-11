@@ -10,15 +10,9 @@ function closeNav() {
     document.getElementById("sidenav").style.width = "0px";
 }
 
-function readNews() {
-    localStorage.setItem("news", news);
-    document.getElementById("sidelinknews").classList.remove("la");
-    document.getElementById("sidelinknews").classList.add("na");
-}
-
 function addNav() {
-    var frame = document.getElementById("sidenav");
-    var thing = '';
+    const frame = document.getElementById("sidenav");
+    let thing = '';
     thing += '<a id="closesidenav" onclick="closeNav()">&times;</a>';
     thing += '<a onclick="redirect(\'index\')" id="sidelink">Home</a>';
     thing += '<a onclick="redirect(\'about\')" id="sidelink">About</a>';
@@ -32,10 +26,10 @@ function addNav() {
 }
 
 function redirect(page) {
-    var path = window.location.pathname;
-    var currentPage = path.split("/").pop();
-    var projectPage = false;
-    if (currentPage == "quiz.html" || currentPage == "42.html" || currentPage == "gol.html") projectPage = true;
+    const path = window.location.pathname;
+    const currentPage = path.split("/").pop();
+    let projectPage = false;
+    if (currentPage === "quiz.html" || currentPage === "42.html" || currentPage === "gol.html") projectPage = true;
     switch (page) {
         case "index":
         case "about":
@@ -51,16 +45,16 @@ function redirect(page) {
 
 function main() {
     addNav();
-    var field = document.getElementById("field");
+    const field = document.getElementById("field");
     if (isOverflowing(field)) field.style.overflowY = "scroll";
     else field.style.overflowY = "hidden";
 
     //yoinked from colon's furry site
-    let observer = new MutationObserver(mutation => {
+    let observer = new MutationObserver(() => {
         if (isOverflowing(field)) field.style.overflowY = "scroll";
         else field.style.overflow = "hidden";
     });
     observer.observe(document.getElementById("text-content"), {childList: true, subtree: true, attributes: true, characterData: true});
 }
 
-window.onload = main();
+window.onload = main;

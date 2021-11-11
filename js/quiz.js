@@ -1,41 +1,41 @@
-var frame = document.getElementById("text-content");
-var storage = window.localStorage;
+const frame = document.getElementById("text-content");
+const storage = window.localStorage;
 
 const modeLength = ["72"];
 
 const nameTheMobAnswers = ["horse", "evoker", "iron golem", "mule", "wandering trader", "enderman", "hoglin", "endermite", "guardian", "elder guardian", "donkey", "phantom", "slime", "cave spider", "villager", "turtle", "drowned", "zombie villager", "killer bunny", "vindicator", "wolf", "polar bear", "ocelot", "strider", "witch", "wither", "zombie horse", "blaze", "illusioner", "rabbit", "sheep", "tropical fish", "stray", "vex", "ender dragon", "piglin brute", "parrot", "bee", "llama", "wither skeleton", "axolotl", "fox", "snow golem", "zoglin", "cow", "pufferfish", "mooshroom", "zombified piglin", "silverfish", "creeper", "pillager", "shulker", "zombie", "husk", "salmon", "glow squid", "piglin", "cat", "skeleton horse", "magma cube", "spider", "ghast", "skeleton", "panda", "squid", "bat", "dolphin", "goat", "chicken", "ravager", "pig", "cod"];
 
-var completed = [];
+const completed = [];
 
 //switcheroos
-var wrong = false;
-var right = false;
+let wrong = false;
+let right = false;
 
 function saveData(mode) {
-    if (mode == 0) return;
-    var save = "";
-    var comp = completed[mode - 1];
-    for (var i = 0; i < comp.length; i++) {
+    if (mode === 0) return;
+    let save = "";
+    const comp = completed[mode - 1];
+    for (let i = 0; i < comp.length; i++) {
         save += comp[i] ? "1" : "0";
     }
     storage.setItem("quiz" + mode, save);
 }
 
 function loadData(mode) {
-    if (mode == 0) return;
-    var save = "";
-    var length = modeLength[mode - 1];
+    if (mode === 0) return;
+    let save = "";
+    const length = modeLength[mode - 1];
     if (storage.getItem("quiz" + mode)) save = storage.getItem("quiz" + mode);
     else {
-        for (var i = 0; i < length; i++) save += "0";
+        for (let i = 0; i < length; i++) save += "0";
     }
     if (save.length <= length) {
-        var missingLength = length - save.length;
-        for (var i = 0; i < missingLength; i++) save += "0";
+        const missingLength = length - save.length;
+        for (let i = 0; i < missingLength; i++) save += "0";
     }
-    var temp = [];
-    for (var i = 0; i < length; i++) {
-        temp[i] = save.charAt(i) == "1";
+    const temp = [];
+    for (let i = 0; i < length; i++) {
+        temp[i] = save.charAt(i) === "1";
     }
     completed[mode - 1] = temp;
 }
@@ -74,20 +74,20 @@ function loadNew(thing) {
 }
 
 function isCompleted(mode, level) {
-    var comp = completed[mode - 1];
+    const comp = completed[mode - 1];
     return comp[level - 1];
 }
 
 function complete(mode, level) {
-    var comp = completed[mode - 1];
+    const comp = completed[mode - 1];
     comp[level - 1] = true;
     completed[mode - 1] = comp;
     saveData(mode);
 }
 
 function loadQuiz(mode, level) {
-    var thing = "";
-    if (mode == 1) {
+    let thing = "";
+    if (mode === 1) {
         thing += "<h1>Name the Mob</h1>";
         thing += "<h3>Level " + level + "</h3>";
         thing += "<img src=\"../assets/mcmobs/" + level + ".png\" alt=\"Error\"><br><br><br>";
@@ -99,26 +99,26 @@ function loadQuiz(mode, level) {
 }
 
 function checkAnswer(mode, level) {
-    var input = document.getElementById("input").value;
-    if (input == "") return;
+    let input = document.getElementById("input").value;
+    if (input === "") return;
     input = input.toLowerCase();
     console.log(input);
     input += "\n";
-    var start = 0;
-    for (var i = 0; i < input.length; i++) {
-        if (input.charAt(i) == ' ') start ++;
+    let start = 0;
+    for (let i = 0; i < input.length; i++) {
+        if (input.charAt(i) === ' ') start ++;
         else break;
     }
     input = input.substring(start, input.length);
-    var end = input.length - 1;
-    for (var i = input.length - 2; i > 0; i--) {
-        if (input.charAt(i) == ' ') end--;
+    let end = input.length - 1;
+    for (let i = input.length - 2; i > 0; i--) {
+        if (input.charAt(i) === ' ') end--;
         else break;
     }
     input = input.substring(0, end);
     console.log(input);
-    if (mode == 1) {
-        var answer = nameTheMobAnswers[level - 1];
+    if (mode === 1) {
+        const answer = nameTheMobAnswers[level - 1];
         if (input === answer) {
             if (!right) {
                 if (wrong) document.getElementById("wrong").outerHTML = "";
@@ -140,14 +140,14 @@ function checkAnswer(mode, level) {
 
 function loadLevels(title, subtitle, mode, levelCount) {
     loadData(mode);
-    var thing = "<h1>" + title + "</h1><p>" + subtitle + "</p><br>";
-    if (mode == 1) thing += "<a id=\"button\" onclick=\"loadNew(minecraftHTML)\">Back</a><br><br><br>";
-    var part = "";
-    var tens = 0;
-    for (var i = 0; i < levelCount; i++) {
+    let thing = "<h1>" + title + "</h1><p>" + subtitle + "</p><br>";
+    if (mode === 1) thing += "<a id=\"button\" onclick=\"loadNew(minecraftHTML)\">Back</a><br><br><br>";
+    let part = "";
+    let tens = 0;
+    for (let i = 0; i < levelCount; i++) {
         part += "<a id=\"button" + (isCompleted(mode, i + 1) ? "a" : "") + "\" onclick=\"loadQuiz(" + mode + ", " + (i + 1) + ")\">Level " + (i + 1) + "</a>&nbsp;&nbsp;";
         tens++;
-        if (tens == 10) {
+        if (tens === 10) {
             part += "<br><br><br>";
             tens = 0;
         }

@@ -1,12 +1,12 @@
-var num = -1;
-var befNum = -1;
-var time = 0;
-var pb = "";
+let num = -1;
+let befNum = -1;
+let time = 0;
+let pb = "";
 
 function startGame() {
-    var frame = document.getElementById("game");
+    const frame = document.getElementById("game");
     frame.innerHTML = "";
-    var thing = "";
+    let thing = "";
     num = getRandNum();
     befNum = num;
     thing += "<a id=\"randNum\">" + num + "</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
@@ -20,24 +20,24 @@ function startGame() {
     thing += "<a id=\"button\" class=\"change\" onclick=\"addCross()\">Add cross sum</a>&nbsp;";
     thing += "<a id=\"button\" class=\"change\" onclick=\"subCross()\">Subtract cross sum</a>&nbsp;";
     frame.insertAdjacentHTML("beforeend", thing);
-    var date = new Date();
+    const date = new Date();
     time = date.getTime();
 }
 
 function win() {
-    var items = document.getElementsByClassName("change");
-    for (var i = 0; i < items.length; i++) {
+    const items = document.getElementsByClassName("change");
+    for (let i = 0; i < items.length; i++) {
         items.item(i).onclick = null;
     }
-    var date = new Date();
-    var now = date.getTime();
+    const date = new Date();
+    const now = date.getTime();
     time = now - time;
-    var hours = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((time % (1000 * 60)) / 1000);
-    var millis = Math.floor(time % 1000);
+    const hours = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((time % (1000 * 60)) / 1000);
+    const millis = Math.floor(time % 1000);
     console.log(hours + ", " + minutes + ", " + seconds + ", " + millis);
-    newPB = (hours != 0 ? (hours + ":") : "") + (minutes >= 10 ? minutes : ("0" + minutes)) + ":" + (seconds >= 10 ? seconds : ("0" + seconds)) + ":" + millis;
+    let newPB = (hours !== 0 ? (hours + ":") : "") + (minutes >= 10 ? minutes : ("0" + minutes)) + ":" + (seconds >= 10 ? seconds : ("0" + seconds)) + ":" + millis;
     if (isNewPB(newPB)) {
         pb = newPB;
         localStorage.setItem("42pb", pb);
@@ -48,14 +48,14 @@ function win() {
 }
 
 function isNewPB(newPB) {
-    if (pb == "--") return true;
-    var split = pb.split(":");
-    var nSplit = newPB.split(":");
+    if (pb === "--") return true;
+    const split = pb.split(":");
+    const nSplit = newPB.split(":");
     if (split.length > nSplit.length) return true;
     if (split.length < nSplit.length) return false;
-    for (var i = 0; i < split.length; i++) {
-        var a = parseInt(split[i]);
-        var b = parseInt(nSplit[i]);
+    for (let i = 0; i < split.length; i++) {
+        const a = parseInt(split[i]);
+        const b = parseInt(nSplit[i]);
         if (a > b) return true;
         if (a < b) return false;
     }
@@ -90,32 +90,32 @@ function root() {
 }
 
 function floor() {
-    var length = num.toString().length;
-    var newNum = "";
+    const length = num.toString().length;
+    let newNum = "";
     newNum += num.toString().charAt(0);
-    for (var i = 1; i < length; i++) newNum += "0";
+    for (let i = 1; i < length; i++) newNum += "0";
     num = parseInt(newNum);
     update("floor(" + befNum + ")");
 }
 
 function ceil() {
-    var length = num.toString().length;
-    var newNum = "";
+    const length = num.toString().length;
+    let newNum = "";
     newNum += num.toString().charAt(0);
     newNum = (parseInt(newNum) + 1).toString();
-    for (var i = 1; i < length; i++) newNum += "0";
+    for (let i = 1; i < length; i++) newNum += "0";
     num = parseInt(newNum);
     update("ceil(" + befNum + ")");
 }
 
 function addCross() {
-    var sum = getCrossSum(num);
+    const sum = getCrossSum(num);
     num += sum;
     update("+" + sum);
 }
 
 function subCross() {
-    var sum = getCrossSum(num);
+    const sum = getCrossSum(num);
     num -= sum;
     update("-" + sum);
 }
@@ -126,9 +126,9 @@ function sub3() {
 }
 
 function getCrossSum(aNum) {
-    var sNum = aNum.toString();
-    var sum = 0;
-    for (var i = 0; i < sNum.length; i++) {
+    const sNum = aNum.toString();
+    let sum = 0;
+    for (let i = 0; i < sNum.length; i++) {
         sum += parseInt(sNum.charAt(i));
     }
     return sum;
@@ -138,19 +138,18 @@ function getCrossSum(aNum) {
 function update(op) {
     document.getElementById("randNum").innerHTML = num;
     document.getElementById("lastOp").innerHTML = op;
-    if (num == 45) document.getElementById("game").insertAdjacentHTML("beforeend", "<a class=\"button\" id=\"removeMe\" onclick=\"sub3()\">Subtract 3</a>");
+    if (num === 45) document.getElementById("game").insertAdjacentHTML("beforeend", "<a class=\"button\" id=\"removeMe\" onclick=\"sub3()\">Subtract 3</a>");
     else if (document.getElementById("removeMe")) document.getElementById("removeMe").remove();
-    if (num == 42) win();
+    if (num === 42) win();
     befNum = num;
 }
 
 function getRandNum() {
     //get a random range of numbers
-    var rangeStart = Math.floor(Math.random() * 1000) + 1;
-    var rangeEnd = Math.floor(Math.random() * 1000000) + 1000;
+    const rangeStart = Math.floor(Math.random() * 1000) + 1;
+    const rangeEnd = Math.floor(Math.random() * 1000000) + 1000;
     //get a random number within the range
-    var num = Math.floor(Math.random() * rangeEnd) + rangeStart;
-    return num;
+    return Math.floor(Math.random() * rangeEnd) + rangeStart;
 }
 
 function getPB() {
@@ -159,4 +158,4 @@ function getPB() {
     document.getElementById("pb").innerHTML = "Personal best: " + pb;
 }
 
-window.onload = getPB();
+window.onload = getPB;

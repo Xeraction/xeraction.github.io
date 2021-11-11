@@ -46,13 +46,11 @@ html, body {
     z-index: 1;
     top: 0;
     left: -10px;
-    /*background-color: #dcd790;*/
     background-color: white;
     overflow-x: hidden;
     padding-top: 60px;
     transition: 0.5s;
-    border-color: black;
-    border: solid;
+    border: solid black;
 }
 
 #sidelink {

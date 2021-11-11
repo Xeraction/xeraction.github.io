@@ -143,13 +143,14 @@ function loadLevels(title, subtitle, mode, levelCount) {
     let thing = "<h1>" + title + "</h1><p>" + subtitle + "</p><br>";
     if (mode === 1) thing += "<a id=\"button\" onclick=\"loadNew(minecraftHTML)\">Back</a><br><br><br>";
     let part = "";
-    let tens = 0;
+    const width = document.getElementById("text-content").clientWidth;
+    let count = 0;
     for (let i = 0; i < levelCount; i++) {
         part += "<a id=\"button" + (isCompleted(mode, i + 1) ? "a" : "") + "\" onclick=\"loadQuiz(" + mode + ", " + (i + 1) + ")\">Level " + (i + 1) + "</a>&nbsp;&nbsp;";
-        tens++;
-        if (tens === 10) {
+        count += 150;
+        if (count >= width) {
+            count = 0;
             part += "<br><br><br>";
-            tens = 0;
         }
     }
     thing += part;

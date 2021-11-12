@@ -45,6 +45,7 @@ function redirect(page) {
 
 function main() {
     addNav();
+    console.log("main called");
     const field = document.getElementById("field");
     if (isOverflowing(field)) field.style.overflowY = "scroll";
     else field.style.overflowY = "hidden";
@@ -55,6 +56,7 @@ function main() {
         else field.style.overflow = "hidden";
     });
     observer.observe(document.getElementById("text-content"), {childList: true, subtree: true, attributes: true, characterData: true});
+    return undefined;
 }
 
-window.onload = main;
+window.onload = main();

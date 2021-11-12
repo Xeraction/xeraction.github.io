@@ -1,15 +1,17 @@
 const frame = document.getElementById("text-content");
 const storage = window.localStorage;
 
-const modeLength = ["72"];
+const modeLength = [72, 46];
 
 const nameTheMobAnswers = ["horse", "evoker", "iron golem", "mule", "wandering trader", "enderman", "hoglin", "endermite", "guardian", "elder guardian", "donkey", "phantom", "slime", "cave spider", "villager", "turtle", "drowned", "zombie villager", "killer bunny", "vindicator", "wolf", "polar bear", "ocelot", "strider", "witch", "wither", "zombie horse", "blaze", "illusioner", "rabbit", "sheep", "tropical fish", "stray", "vex", "ender dragon", "piglin brute", "parrot", "bee", "llama", "wither skeleton", "axolotl", "fox", "snow golem", "zoglin", "cow", "pufferfish", "mooshroom", "zombified piglin", "silverfish", "creeper", "pillager", "shulker", "zombie", "husk", "salmon", "glow squid", "piglin", "cat", "skeleton horse", "magma cube", "spider", "ghast", "skeleton", "panda", "squid", "bat", "dolphin", "goat", "chicken", "ravager", "pig", "cod"];
+const nameTheBiomeAnswers = ["flower forest", "tall birch forest", "jungle", "nether wastes", "beach", "stony shore", "frozen river", "lush caves", "badlands", "lukewarm ocean", "savanna", "old growth spruce taiga", "bamboo jungle", "ice spikes", "plains", "mushroom fields", "basalt deltas", "forest", "cold ocean", "swamp", "desert", "dripstone caves", "snowy tundra", "old growth pine taiga", "birch forest", "ocean", "eroded badlands", "windswept forest", "snowy taiga", "soul sand valley", "sparse jungle", "river", "frozen ocean", "windswept savanna", "warped forest", "sunflower plains", "taiga mountains", "snowy beach", "dark forest", "windswept gravelly hills", "taiga", "warm ocean", "wooded badlands", "crimson forest", "windswept hills", "snowy taiga mountains"];
 
 const completed = [];
 
 //switcheroos
 let wrong = false;
 let right = false;
+let hintShownLetters = 0;
 
 function saveData(mode) {
     if (mode === 0) return;
@@ -43,6 +45,7 @@ function loadData(mode) {
 function deleteData() {
     if (window.confirm("Are you sure you want to delete your entire Quiz Data? All your progress will be lost!")) {
         storage.removeItem("quiz1");
+        storage.removeItem("quiz2");
         main();
     }
 }
@@ -50,6 +53,7 @@ function deleteData() {
 function resetSwitcheroos() {
     wrong = false;
     right = false;
+    hintShownLetters = 0;
 }
 
 const mainHTML = "<h1>Quizzes</h1>" +
@@ -64,10 +68,12 @@ const minecraftHTML = "<h1>Minecraft Quizzes</h1>" +
     "<p>Here you will find a collection of Minecraft themed quizzes, all with different topics.<br>" +
     "Click on one of the buttons below to get started!</p><br><br>" +
     "<a id=\"button\" onclick=\"loadNameMob()\">Name the Mob</a>&nbsp;&nbsp;&nbsp;&nbsp;" +
-    "<br><br><br><br><br><br><a id=\"button\" onclick=\"loadNew(mainHTML)\">Back</a>";
+    "<a id=\"button\" onclick=\"loadNameBiomes()\">Name the Biome</a>&nbsp;&nbsp;&nbsp;&nbsp;" +
+    "<br><br><br><br><br><br><br><a id=\"button\" onclick=\"loadNew(mainHTML)\">Back</a>";
 
 function loadNew(thing) {
     resetSwitcheroos();
+    thing += "<br><br>";
     thing += "<div style=\"clear:both;\"></div>";
     frame.innerHTML = "";
     frame.insertAdjacentHTML("beforeend", thing);
@@ -94,15 +100,49 @@ function loadQuiz(mode, level) {
         thing += "<input type=\"text\" id=\"input\"><br><br><br>";
         thing += "<a id=\"button\" onclick=\"checkAnswer(1, " + level + ")\">Check</a>&nbsp;&nbsp;";
         thing += "<a id=\"button\" onclick=\"loadNameMob()\">Back</a>";
+    } else if (mode === 2) {
+        thing += "<h1>Name the Biome</h1>";
+        thing += "<h3>Level " + level + "</h3>";
+        thing += "<img src=\"../assets/mcbiomes/" + level + ".png\" alt=\"Error\"><br><br><br>";
+        thing += "<input type=\"text\" id=\"input\"><br><br><br>";
+        thing += "<a id=\"button\" onclick=\"checkAnswer(2, " + level + ")\">Check</a>&nbsp;&nbsp;";
+        thing += "<a id=\"button\" onclick=\"loadNameBiomes()\">Back</a>";
     }
+    thing += "<br><br>";
+    thing += "<p id=\"right\" style=\"color:green;font-size:30px;display:none;\">RIGHT</p>";
+    thing += "<p id=\"wrong\" style=\"color:red;font-size:30px;display:none;\">WRONG</p>";
+    thing += "<p>Hints</p><br>";
+    thing += "<a id=\"button\" onclick=\"getHint(1, " + mode + ", " + level + ")\">Show word count</a>&nbsp;&nbsp;";
+    thing += "<a id=\"button\" onclick=\"getHint(2, " + mode + ", " + level + ")\">Show letter count</a>&nbsp;&nbsp;";
+    thing += "<a id=\"button\" onclick=\"getHint(3, " + mode + ", " + level + ")\">Show one letter</a>";
+    thing += "<br><br><p id=\"hintDisplay\"></p>";
     loadNew(thing);
+}
+
+function getHint(hintMode, quizMode, level) {
+    let display = "";
+    let answer = "";
+    if (quizMode === 1) answer = nameTheMobAnswers[level - 1];
+    else if (quizMode === 2) answer = nameTheBiomeAnswers[level - 1];
+    if (hintMode === 1) {
+        let split = answer.split(" ");
+        display = split.length;
+    } else if (hintMode === 2) {
+        let tempAns = answer.replace(" ", "");
+        display = tempAns.length;
+    } else if (hintMode === 3) {
+        if (answer.charAt(hintShownLetters) === ' ') hintShownLetters++;
+        display = "";
+        document.getElementById("input").value = answer.slice(0, hintShownLetters + 1);
+        hintShownLetters++;
+    }
+    document.getElementById("hintDisplay").innerHTML = display;
 }
 
 function checkAnswer(mode, level) {
     let input = document.getElementById("input").value;
     if (input === "") return;
     input = input.toLowerCase();
-    console.log(input);
     input += "\n";
     let start = 0;
     for (let i = 0; i < input.length; i++) {
@@ -116,24 +156,23 @@ function checkAnswer(mode, level) {
         else break;
     }
     input = input.substring(0, end);
-    console.log(input);
-    if (mode === 1) {
-        const answer = nameTheMobAnswers[level - 1];
-        if (input === answer) {
-            if (!right) {
-                if (wrong) document.getElementById("wrong").outerHTML = "";
-                frame.insertAdjacentHTML("beforeend", "<p id=\"right\" style=\"color:green;font-size:30px;\">RIGHT</p>");
-                complete(mode, level);
-                right = true;
-                wrong = false;
-            }
-        } else {
-            if (!wrong) {
-                if (right) document.getElementById("right").outerHTML = "";
-                frame.insertAdjacentHTML("beforeend", "<p id=\"wrong\" style=\"color:red;font-size:30px;\">WRONG</p>");
-                wrong = true;
-                right = false;
-            }
+    let answer = "";
+    if (mode === 1) answer = nameTheMobAnswers[level - 1];
+    else if (mode === 2) answer = nameTheBiomeAnswers[level - 1];
+    if (input === answer) {
+        if (!right) {
+            if (wrong) document.getElementById("wrong").style.display = "none";
+            document.getElementById("right").style.display = "block";
+            complete(mode, level);
+            right = true;
+            wrong = false;
+        }
+    } else {
+        if (!wrong) {
+            if (right) document.getElementById("right").style.display = "none";
+            document.getElementById("wrong").style.display = "block";
+            wrong = true;
+            right = false;
         }
     }
 }
@@ -141,7 +180,7 @@ function checkAnswer(mode, level) {
 function loadLevels(title, subtitle, mode, levelCount) {
     loadData(mode);
     let thing = "<h1>" + title + "</h1><p>" + subtitle + "</p><br>";
-    if (mode === 1) thing += "<a id=\"button\" onclick=\"loadNew(minecraftHTML)\">Back</a><br><br><br>";
+    if (mode === 1 || mode === 2) thing += "<a id=\"button\" onclick=\"loadNew(minecraftHTML)\">Back</a><br><br><br>";
     let part = "";
     const width = document.getElementById("text-content").clientWidth;
     let count = 0;
@@ -159,6 +198,10 @@ function loadLevels(title, subtitle, mode, levelCount) {
 
 function loadNameMob() {
     loadLevels("Name the Mob", "Do you know the name of the shown mob? Type it in the textbox underneath the picture and press check!", 1, 72);
+}
+
+function loadNameBiomes() {
+    loadLevels("Name the Biome", "Do you know the name of the shown biome? Type it in the textbox underneath the picture and press check!<br>Attention: This quiz uses the 1.18 biome names since some of the biomes have been renamed in the update.", 2, 46);
 }
 
 function main() {

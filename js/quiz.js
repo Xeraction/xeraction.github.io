@@ -201,7 +201,7 @@ function loadNameMob() {
 }
 
 function loadNameBiomes() {
-    loadLevels("Name the Biome", "Do you know the name of the shown biome? Type it in the textbox underneath the picture and press check!<br>Attention: This quiz uses the 1.18 biome names since some of the biomes have been renamed in the update.", 2, 46);
+    loadLevels("Name the Biome", "Do you know the name of the shown biome? Type it in the textbox underneath the picture and press check!", 2, 46);
 }
 
 function main() {

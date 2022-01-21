@@ -29,7 +29,7 @@ function redirect(page) {
     const path = window.location.pathname;
     const currentPage = path.split("/").pop();
     let projectPage = false;
-    if (currentPage === "quiz.html" || currentPage === "42.html" || currentPage === "gol.html") projectPage = true;
+    if (currentPage === "quiz.html" || currentPage === "42.html") projectPage = true;
     switch (page) {
         case "index":
         case "about":
@@ -37,15 +37,13 @@ function redirect(page) {
         case "contact":
         case "help": window.location.assign("." + (projectPage ? "." : "") + "/" + page + ".html"); console.log(projectPage); break;
         case "quiz":
-        case "42":
-        case "gol": window.location.assign("." + (projectPage ? "" : "/projects") + "/" + page + ".html"); console.log(projectPage); break;
+        case "42": window.location.assign("." + (projectPage ? "" : "/projects") + "/" + page + ".html"); console.log(projectPage); break;
         default: window.location.replace("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
     }
 }
 
 function main() {
     addNav();
-    console.log("main called");
     const field = document.getElementById("field");
     if (isOverflowing(field)) field.style.overflowY = "scroll";
     else field.style.overflowY = "hidden";

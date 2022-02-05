@@ -1,0 +1,104 @@
+<html>
+    <head>
+        <title>Lettercode</title>
+        <meta charset="utf-8">
+        <meta name="description" content="My own esolang! How exciting...">
+        <meta name="author" content="Xeraction">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../main.css">
+    </head>
+    <body>
+        <div id="sidenav"></div>
+        <a id="opensidenav" onclick="openNav()">&#9776;</a>
+        <div id="content">
+            <div id="field">
+                <div id="text-content">
+                    <h1>Lettercode</h1>
+                    <p>Lettercode is an esolang I came up with some time ago.<br>Now I'm finally finishing it up as an online interpreter!</p>
+                    <p>Don't expect anything crazy, it's just a small project of mine. (ok it's the biggest one yet)</p>
+                    <p>Type the lettercode syntax into the textbox below and hit run!<br>The syntax can be found below.</p>
+                    <textarea id="lcinput"></textarea><br><br><br>
+                    <a id="run" class="button" onclick="runCode()">Run</a>
+                    <a id="stop" class="button" onclick="stopCode()" style="display:none">Stop</a><br><br>
+                    <p id="error" style="color:red"></p>
+                    <p id="output"></p>
+                    <h3>Syntax</h3>
+                    <p>Lettercode has to be on one line with no spaces.<br>Below are the syntax letters with their equivalent in literally every other language.<br>Below every syntax a short example with the javascript equivalent is given.</p>
+                    <p>
+                        l = <strong>;</strong> (Has to be at the end of every statement)<br>
+                        Example: hsHis<strong>l</strong> (console.log('Hi')<strong>;</strong><br><br>
+                        x = <strong>End program</strong><br>
+                        The program has to end with this or it will not run.<br>
+                        You can use it everywhere else as well, like inside if statements.<br><br>
+                        h = <strong>console.log()</strong><br>
+                        Example: <strong>h</strong>sHisl<br>
+                        As values for variables and stuff like this, the structure [surrounder][content][surrounder] is used.<br><br>
+                        <strong>Surrounders:</strong><br>
+                        - s (string) Example: <strong>s</strong>Hi<strong>s</strong><br>
+                        - c (character) Example: <strong>c</strong>H<strong>c</strong><br>
+                        - i (integer) Example: <strong>i</strong>42<strong>i</strong><br>
+                        - d (double) Example: <strong>d</strong>4.2<strong>d</strong><br>
+                        - b (boolean) Example: <strong>b</strong>true<strong>b</strong><br><br>
+                        <strong>Rules for string/character values:</strong><br>
+                        The character 'g' is the escape character.<br>
+                        gn = newline<br>
+                        gl = whitespace<br>
+                        gs/gc = escape characters to not end string early<br>
+                        gg = escape itself<br><br>
+                        v = <strong>Variable initialization</strong><br>
+                        Example: vVARei42il (let var = 42;)<br><br>
+                        <strong>Rules for variables:</strong><br>
+                        Variable names must be uppercase.<br><br>
+                        e = <strong>=</strong> (Used to assign a value to variables)<br>
+                        Example: vVAR<strong>e</strong>sHisl (let var <strong>=</strong> 'Hi';)<br><br>
+                        p = <strong>+</strong> (Used for addition)<br>
+                        Example: vVARei4i<strong>p</strong>i2il (let var = 4 <strong>+</strong> 2;)<br><br>
+                        m = <strong>-</strong> (Used for subtraction)<br>
+                        Example: vVARei4i<strong>m</strong>i2il (let var = 4 <strong>-</strong> 2;)<br><br>
+                        n = <strong>*</strong> (Used for multiplication)<br>
+                        Example: vVARei4i<strong>n</strong>i2il (let var = 4 <strong>*</strong> 2;)<br><br>
+                        q = <strong>/</strong> (Used for division)<br>
+                        Example: vVARei4i<strong>q</strong>i2il (let var = 4 <strong>/</strong> 2;)<br><br>
+                        Start a statement with an uppercase variable name to make operations to it.<br><br>
+                        pe = <strong>+=</strong> (Adds a value to a variable)<br>
+                        Example: VAR<strong>pe</strong>i42il (var <strong>+=</strong> 42;)<br><br>
+                        me = <strong>-=</strong> (Subtracts a value from a variable)<br>
+                        Example: VAR<strong>me</strong>i42il (var <strong>-=</strong> 42;)<br><br>
+                        ne = <strong>*=</strong> (Multiplies a variable with a value)<br>
+                        Example: VAR<strong>ne</strong>i42il (var <strong>*=</strong> 42;)<br><br>
+                        qe = <strong>/=</strong> (Divides a variable by a value)<br>
+                        Example: VAR<strong>qe</strong>i42il (var <strong>/=</strong> 42;)<br><br>
+                        <strong>Conditions</strong><br>
+                        Conditions are used in two places: if and while statements.<br>
+                        To make a condition, enter a value, a conditional operator and another value. (val1 op val2)<br><br>
+                        <strong>Conditional operators:</strong><br>
+                        - gt (greater than (>))<br>
+                        - lt (less than (<))<br>
+                        - et (equal to (==))<br><br>
+                        Example: i42igti7i<br>
+                        Returns true, because 42 is greater than 7.<br><br>
+                        <strong>Block statements</strong><br><br>
+                        j = <strong>if</strong><br>
+                        Structure: j[condition]t[code]z<br>
+                        t is the opening brace ({) and z the closing brace(})<br>
+                        Example: jVARlti42ithi42ilz<br>
+                        If the variable var is less than 42, it will print 42.<br><br>
+                        r = <strong>while</strong>
+                        Structure: r[condition]t[code]z<br>
+                        t is the opening brace ({) and z the closing brace(})<br>
+                        Example: <strong>vVARei1ilrVARlti43ithVARps:gl42slVARpei1ilzx</strong><br>
+                        This program will print out the number 42 42 times. You can copy this into the input box and see that it works.<br><br>
+                        Small breakdown:<br>
+                        vVARei1il - Initializes the variable var with the value of 1<br>
+                        rVARlti43it...z - Loops as long as var is less than 43<br>
+                        hVARps:gl42sl - Print the var followed by ': 42'<br>
+                        VARpei1il - Increases var by one so the loop will run 42 times<br>
+                        x - Ends the program
+                    </p>
+                </div>
+            </div>
+        </div>
+        <script src="../js/main.js"></script>
+        <script src="../js/lettercode.js"></script>
+    </body>
+</html>

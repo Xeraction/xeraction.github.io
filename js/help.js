@@ -3,7 +3,7 @@ let bings = 0;
 let gay = false;
 let lastMsgIndex = -1;
 
-const noIdeaPool = ["Sorry, I didn't understand you. Can you ask me something else, please?", "Why are you asking something that difficult?", "I think I need a hearing aid.", "Is that your mom? Oh, it's just the size of stupidity this question has.", "Uhh... apple?", "\"bHg5T#0\"", "Oh, wow. Good question. You must be VERY intelligent.", "The last statement was a lie.", "Please, kid, eat this banana. (You got a banana)", "This message will never be shown on the website. Isn't that weird?", "yo mama so fat she sucks in a black hole", "Stop bothering me. (actually, continue)", "Puny question.", "I don't like monkeys.", "disconnected", "I know secrets, but I won't tell you. So stop asking.", "Live a happy life and stop asking questions.", "Don't question the matrix."];
+const noIdeaPool = ["Sorry, I didn't understand you. Can you ask me something else, please?", "Why are you asking something that difficult?", "I think I need a hearing aid.", "Is that your mom? Oh, it's just the size of stupidity this question has.", "Uhh... apple?", "\"bHg5T#0\"", "Oh, wow. Good question. You must be VERY intelligent.", "The last statement was a lie.", "Please, kid, eat this banana. (You got a banana)", "This message will never be shown on the website. Isn't that weird?", "yo mama so fat she sucks in a black hole", "Stop bothering me. (actually, continue)", "Puny question.", "I don't like monkeys.", "disconnected", "I know secrets, but I won't tell you. So stop asking.", "Live a happy life and stop asking questions.", "Don't question the matrix.", "Is that all you can do?", "Are you even trying?", "You. Are. Toast.", "That's a wonderful idea!", "What do you call a stupid question? This.", "What a shame I don't have an answer for this.", "Uhh, 42?", "It's not something you would want to know."];
 
 function getIndex() {
     let index = Math.floor(Math.random() * noIdeaPool.length);
@@ -98,6 +98,8 @@ function submitHelp() {
         window.location.replace("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
     } else if (helpText.includes("give me lore")) {
         answer.append("If you want lore, you came to the wrong place. Find it somewhen, not somewhere.");
+    } else if (helpText === "when is it here") {
+        answer.append("Expectations are too low. Need more input...");
     } else {
         let index = getIndex();
         answer.append(noIdeaPool[index]);

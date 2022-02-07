@@ -114,7 +114,6 @@ function parseCode(start, end, main) { //both inclusive
     let partIndex = 0;
     if (main && !code.endsWith('x')) error('The program didn\'t end with an end statement.');
     for (let current = 0; current < code.length;) {
-        console.log(code[current] + ' ' + (current + start));
         if (code[current] === 'x') {
             //end program
             let part = {"type": "statement", "key": "end_program"};
@@ -202,7 +201,6 @@ function parseCode(start, end, main) { //both inclusive
             if (main) jsonCode[pars_cur_index++] = part;
             else partCode[partIndex++] = part;
             current = closingPos - start + 1;
-            console.log(current);
             continue;
         }
         if (code[current] === 'r') {

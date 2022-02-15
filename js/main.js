@@ -23,6 +23,7 @@ function addNav() {
     thing += '<a onclick="redirect(\'quiz\')" id="sidelink">Quiz</a>';
     thing += '<a onclick="redirect(\'42\')" id="sidelink">42</a>';
     thing += '<a onclick="redirect(\'lettercode\')" id="sidelink">Lettercode</a>';
+    thing += '<a onclick="redirect(\'gol\')" id="sidelink">Game of Life</a>'
     frame.insertAdjacentHTML("beforeend", thing);
 }
 
@@ -30,7 +31,7 @@ function redirect(page) {
     const path = window.location.pathname;
     const currentPage = path.split("/").pop();
     let projectPage = false;
-    if (currentPage === "quiz.html" || currentPage === "42.html" || currentPage === "lettercode.html") projectPage = true;
+    if (currentPage === "quiz.html" || currentPage === "42.html" || currentPage === "lettercode.html" || currentPage === "gol.html") projectPage = true;
     switch (page) {
         case "index":
         case "about":
@@ -39,7 +40,8 @@ function redirect(page) {
         case "help": window.location.assign("." + (projectPage ? "." : "") + "/" + page + ".html"); console.log(projectPage); break;
         case "quiz":
         case "42":
-        case "lettercode": window.location.assign("." + (projectPage ? "" : "/projects") + "/" + page + ".html"); console.log(projectPage); break;
+        case "lettercode":
+        case "gol": window.location.assign("." + (projectPage ? "" : "/projects") + "/" + page + ".html"); console.log(projectPage); break;
         default: window.location.replace("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
     }
 }

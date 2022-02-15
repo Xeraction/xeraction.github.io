@@ -1,0 +1,50 @@
+<html>
+<head>
+    <title>Game of Life</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Here you can play Conways Game of Life with a few added things!">
+    <meta name="author" content="Xeraction">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../main.css">
+</head>
+<body>
+<div id="sidenav"></div>
+<a id="opensidenav" onclick="openNav()">&#9776;</a>
+<div id="content">
+    <div id="field">
+        <div id="text-content">
+            <h1>Game of Life</h1>
+            <p>Welcome to Conways Game of Life!</p>
+            <p>This is a little web version I wanted to do for quite some time, so here ya go.<br>It also has a few extras, like<br>-Realtime drawing<br>-Multiple draw modes<br>-Saving and sharing</p>
+            <p>Enter your desired settings below and click on run!</p>
+            <canvas id="golCanvas"></canvas><br><br><br>
+            <a class="button" id="run" onclick="run();">Run</a>
+            <a class="button" id="stop" onclick="stop();" style="display:none;">Stop</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="button" onclick="clearBoard();">Clear</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="button" onclick="fillRandom();">Fill random</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <label>
+                Draw mode:
+                <select name="drawMode" id="drawMode">
+                    <option value="pixel">Pixel</option>
+                    <option value="glider">Glider</option>
+                    <option value="penta">Pentadecathlon</option>
+                </select>
+            </label><br><br><br>
+            <a class="button" id="save" onclick="saveBtn()">Save</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="button" id="load" onclick="loadBtn()">Load</a><br><br><br>
+            <a class="button" id="saveSlot1" style="display:none;" onclick="save(1);">Slot 1</a>
+            <a class="button" id="loadSlot1" style="display:none;" onclick="load(1);">Slot 1</a>&nbsp;&nbsp;&nbsp;
+            <a class="button" id="saveSlot2" style="display:none;" onclick="save(2);">Slot 2</a>
+            <a class="button" id="loadSlot2" style="display:none;" onclick="load(2);">Slot 2</a>&nbsp;&nbsp;&nbsp;
+            <a class="button" id="saveSlot3" style="display:none;" onclick="save(3);">Slot 3</a>
+            <a class="button" id="loadSlot3" style="display:none;" onclick="load(3);">Slot 3</a>&nbsp;&nbsp;&nbsp;
+            <a class="button" id="saveString" style="display:none;" onclick="save(-1);">Save to string</a>
+            <a class="button" id="loadString" style="display:none;" onclick="load(-1);">Load from string</a>
+            <br><br><br>
+        </div>
+    </div>
+</div>
+<script src="../js/main.js"></script>
+<script src="../js/gol.js"></script>
+</body>
+</html>

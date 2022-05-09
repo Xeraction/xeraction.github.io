@@ -60,7 +60,7 @@ const mainHTML = "<h1>Quizzes</h1>" +
     "<p>Here you will find a collection of quizzes you can play.<br>" +
     "Every quiz has a unique theme, so you can play the quiz you like.<br>" +
     "New quizzes will be added, I just don't know when.<br>" +
-    "For quiz requests, contact me <a href=\"./contact.html\">here</a>.</p><br><br>" +
+    "For quiz requests, contact me <a onclick=\"redirect('contact')\" id=\"alink\">here</a>.</p><br><br>" +
     "<a id=\"button\" onclick=\"loadNew(minecraftHTML)\">Minecraft</a><br><br><br><br><br>" +
     "<a id=\"button\" onclick=\"deleteData()\">Delete Quiz Data</a>";
 

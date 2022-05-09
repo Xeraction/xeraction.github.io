@@ -23,7 +23,7 @@ function addNav() {
     thing += '<a onclick="redirect(\'quiz\')" id="sidelink">Quiz</a>';
     thing += '<a onclick="redirect(\'42\')" id="sidelink">42</a>';
     thing += '<a onclick="redirect(\'lettercode\')" id="sidelink">Lettercode</a>';
-    thing += '<a onclick="redirect(\'gol\')" id="sidelink">Game of Life</a>'
+    thing += '<a onclick="redirect(\'gol\')" id="sidelink">Game of Life</a>';
     frame.insertAdjacentHTML("beforeend", thing);
 }
 

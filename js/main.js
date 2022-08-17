@@ -37,11 +37,11 @@ function redirect(page) {
         case "about":
         case "news":
         case "contact":
-        case "help": window.location.assign("." + (projectPage ? "." : "") + "/" + page + ".html"); console.log(projectPage); break;
+        case "help": window.location.assign("." + (projectPage ? "." : "") + "/" + page + ".html"); break;
         case "quiz":
         case "42":
         case "lettercode":
-        case "gol": window.location.assign("." + (projectPage ? "" : "/projects") + "/" + page + ".html"); console.log(projectPage); break;
+        case "gol": window.location.assign("." + (projectPage ? "" : "/projects") + "/" + page + ".html"); break;
         default: window.location.replace("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
     }
 }

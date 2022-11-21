@@ -109,6 +109,8 @@ function executeCode(code) {
 }
 
 function parseCode(start, end, main) { //both inclusive
+    console.log(start);
+    console.log(end);
     const code = rawCode.substring(start, end + 1);
     let partCode = [];
     let partIndex = 0;
@@ -164,6 +166,7 @@ function parseCode(start, end, main) { //both inclusive
                     case 'm': mode = 'subtract'; break;
                     case 'n': mode = 'multiply'; break;
                     case 'q': mode = 'divide'; break;
+                    case 'y': mode = 'mod'; break;
                     default: error('Operator at variable must be an assignment operator.');
                 }
                 if (code[++current] === 'e') {
@@ -291,6 +294,7 @@ function addTo(string, adder, type, op, isString) {
         if (op === 'minus') num -= add;
         if (op === 'times') num *= add;
         if (op === 'divide') num /= add;
+        if (op === 'mod') num %= add;
         return num.toString();
     }
     if (type === 'boolean') {
@@ -302,6 +306,7 @@ function addTo(string, adder, type, op, isString) {
         if (op === 'minus') num -= add;
         if (op === 'times') num *= add;
         if (op === 'divide') num /= add;
+        if (op === 'mod') num %= add;
         return num.toString();
     }
     error('Invalid variable type.');
@@ -320,6 +325,9 @@ function evaluateCondition(condition) {
     let val2 = valueToString(condition.value_2);
     if (condition.operator === 'equal_to') {
         return condition.value_1.type === condition.value_2.type && val1 === val2;
+    }
+    if (condition.operator === 'nequal_to') {
+        return condition.value_1.type !== condition.value_2.type || val1 !== val2;
     }
     if (condition.value_1.type === 'string' || condition.value_1.type === 'character' || condition.value_2.type === 'string' || condition.value_2.type === 'character') return false;
     if (val1 === 'true') val1 = 1;
@@ -433,6 +441,10 @@ function getValue(pos) {
         //divide
         return {"type": "operator", "key": "divide", "length": 1};
     }
+    if (rawCode[pos] === 'y') {
+        //modulo
+        return {"type": "operator", "key": "mod", "length": 1};
+    }
     return undefined;
 }
 
@@ -474,9 +486,11 @@ function getCondition(pos) {
     let val2;
     let condOp = '';
     pos += getValueLength(val1);
+    console.log(rawCode[pos]);
     if (rawCode[pos] === 'g' && rawCode[pos + 1] === 't') condOp = 'greater_than';
     else if (rawCode[pos] === 'l' && rawCode[pos + 1] === 't') condOp = 'less_than';
     else if (rawCode[pos] === 'e' && rawCode[pos + 1] === 't') condOp = 'equal_to';
+    else if (rawCode[pos] === 'a' && rawCode[pos + 1] === 't') condOp = 'nequal_to';
     else error("Unknown conditional operator.");
     pos += 2;
     val2 = makeValue(pos);
@@ -498,7 +512,7 @@ function getClosingPos(pos) {
         if ((rawCode[i] === 's') && (rawCode[i - 1] !== 'g' || (rawCode[i - 1] === 'g' && rawCode[i - 2] === 'g'))) {
             inString = !inString;
         }
-        if (rawCode[i] === 't' && rawCode[i - 1] !== 'g' && rawCode[i - 1] !== 'l' && rawCode[i - 1] !== 'e' && rawCode[i + 1] !== 'c') {
+        if (rawCode[i] === 't' && rawCode[i - 1] !== 'g' && rawCode[i - 1] !== 'l' && rawCode[i - 1] !== 'e' && rawCode[i - 1] !== 'a' && rawCode[i + 1] !== 'c') {
             if (!inString) {
                 bodyIndex++;
             }

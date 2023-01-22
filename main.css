@@ -1,12 +1,20 @@
 html, body {
     width: 100%;
     height: 100%;
-    background: #3979b8;
+    background-image: linear-gradient(to top, #283541, #7b8fa1);
     overflow: hidden;
 }
 
+h1 {
+    font-size: 60px;
+}
+
+p {
+    font-size: 27px;
+}
+
 #content {
-    background: #3979b8;
+    background-image: linear-gradient(to top, #283541, #7b8fa1);
     width: 100%;
     height: 100%;
     align-items: center;
@@ -16,15 +24,17 @@ html, body {
 }
 
 #field {
-    background-color: white;
+    background-image: linear-gradient(to top, #8c8c8c, #e8e6e6);
     padding-bottom: 15px;
     position: relative;
-    width: 70%;
-    height: 70%;
+    width: 90%;
+    height: 86%;
     overflow-y: scroll;
     overflow-x: hidden;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, .5);
-    border-radius: 5px;
+    //box-shadow: 5px 5px 5px rgba(0, 0, 0, .5);
+    border-radius: 1px;
+    border-color: black;
+    border-style: solid;
     overflow-wrap: break-word;
     word-wrap: break-word;
 }
@@ -46,7 +56,7 @@ html, body {
     z-index: 1;
     top: 0;
     left: -10px;
-    background-color: white;
+    background-color: #d9d5d5;
     overflow-x: hidden;
     padding-top: 60px;
     transition: 0.5s;
@@ -58,21 +68,21 @@ html, body {
     text-decoration: none;
     font-size: 25px;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    color: #5777d1;
+    color: #3b58be;
     display: block;
     cursor: pointer;
     transition: 0.2s;
 }
 
 #sidelink:hover {
-    color: #1d4cce;
+    color: #0135d3;
 }
 
 #sidecat {
     padding: 8px 8px 8px 32px;
     font-size: 25px;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    color: #1d4cce;
+    color: #093cd2;
     font-weight: bold;
 }
 
@@ -97,7 +107,7 @@ html, body {
 }
 
 #opensidenav:hover {
-    color: white;
+    color: #d9d2d2;
 }
 
 #test {
@@ -114,10 +124,10 @@ html, body {
     font-family: helvetica;
     color: black;
     border-radius: 5px;
-    border-color: rgb(47, 47, 48);
+    border-color: black;
     border-style: solid;
     cursor: pointer;
-    background-color: white;
+    background-color: #dadada;
 }
 
 #buttona {
@@ -127,20 +137,24 @@ html, body {
     text-decoration: none;
     font-size: 20px;
     font-family: helvetica;
-    color: black;
+    color: #278a17;
     border-radius: 5px;
-    border-color: rgb(129, 252, 104);
+    border-color: #278a17;
     border-style: solid;
     cursor: pointer;
-    background-color: white;
+    background-color: #dadada;
 }
 
 #button:hover, .button:hover {
-    background-color: rgb(255, 255, 100);
+    background-color: #c2c2c2;
+}
+
+#button:active, .button:active {
+    background-color: #a1a0a0;
 }
 
 #buttona:hover {
-    background-color: rgb(186, 255, 173);
+    background-color: #9ed798;
 }
 
 #randNum {

@@ -110,7 +110,7 @@ function loadQuiz(mode, level) {
     }
     thing += "<br><br>";
     thing += "<p id=\"right\" style=\"color:green;font-size:30px;display:none;\">RIGHT</p>";
-    thing += "<p id=\"wrong\" style=\"color:red;font-size:30px;display:none;\">WRONG</p>";
+    thing += "<p id=\"wrong\" style=\"color:#810404;font-size:30px;display:none;\">WRONG</p>";
     thing += "<p>Hints</p><br>";
     thing += "<a id=\"button\" onclick=\"getHint(1, " + mode + ", " + level + ")\">Show word count</a>&nbsp;&nbsp;";
     thing += "<a id=\"button\" onclick=\"getHint(2, " + mode + ", " + level + ")\">Show letter count</a>&nbsp;&nbsp;";

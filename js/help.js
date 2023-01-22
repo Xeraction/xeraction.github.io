@@ -50,11 +50,11 @@ function submitHelp() {
             case 2: answer.append("No."); break;
             case 3: answer.append("NO"); break;
             case 4: answer.append("NO!"); break;
-            case 5: answer.insertAdjacentHTML("beforeend", "<a style=\"color:red;font-size:42px;\">NO</a>"); break;
-            case 6: answer.insertAdjacentHTML("beforeend", "<a style=\"color:red;font-size:42px;\">STOP IT</a>"); break;
-            case 7: answer.insertAdjacentHTML("beforeend", "<a style=\"color:red;font-size:42px;\">I</a>"); break;
-            case 8: answer.insertAdjacentHTML("beforeend", "<a style=\"color:red;font-size:42px;\">AM</a>"); break;
-            case 9: answer.insertAdjacentHTML("beforeend", "<a style=\"color:red;font-size:42px;\">NOT</a>"); break;
+            case 5: answer.insertAdjacentHTML("beforeend", "<a style=\"color:darkred;font-size:42px;\">NO</a>"); break;
+            case 6: answer.insertAdjacentHTML("beforeend", "<a style=\"color:darkred;font-size:42px;\">STOP IT</a>"); break;
+            case 7: answer.insertAdjacentHTML("beforeend", "<a style=\"color:darkred;font-size:42px;\">I</a>"); break;
+            case 8: answer.insertAdjacentHTML("beforeend", "<a style=\"color:darkred;font-size:42px;\">AM</a>"); break;
+            case 9: answer.insertAdjacentHTML("beforeend", "<a style=\"color:darkred;font-size:42px;\">NOT</a>"); break;
             case 10:
                 answer.insertAdjacentHTML("beforeend", "<a style=\"color:darkred;font-size:69px;\">GOOGLE</a>");
                 answer.classList.add("shaking");

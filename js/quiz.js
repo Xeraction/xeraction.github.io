@@ -98,15 +98,19 @@ function loadQuiz(mode, level) {
         thing += "<h3>Level " + level + "</h3>";
         thing += "<img src=\"../assets/mcmobs/" + level + ".png\" alt=\"Error\"><br><br><br>";
         thing += "<input type=\"text\" id=\"input\"><br><br><br>";
+        if (level > 1) thing += "<a id=\"button\" onclick=\"loadQuiz(1, " + (level - 1) + ")\"><</a>&nbsp;&nbsp;";
         thing += "<a id=\"button\" onclick=\"checkAnswer(1, " + level + ")\">Check</a>&nbsp;&nbsp;";
         thing += "<a id=\"button\" onclick=\"loadNameMob()\">Back</a>";
+        if (level < modeLength[0]) thing += "&nbsp;&nbsp;<a id=\"button\" onclick=\"loadQuiz(1, " + (level + 1) + ")\">></a>";
     } else if (mode === 2) {
         thing += "<h1>Name the Biome</h1>";
         thing += "<h3>Level " + level + "</h3>";
         thing += "<img src=\"../assets/mcbiomes/" + level + ".png\" alt=\"Error\"><br><br><br>";
         thing += "<input type=\"text\" id=\"input\"><br><br><br>";
+        if (level > 1) thing += "<a id=\"button\" onclick=\"loadQuiz(2, " + (level - 1) + ")\"><</a>&nbsp;&nbsp;";
         thing += "<a id=\"button\" onclick=\"checkAnswer(2, " + level + ")\">Check</a>&nbsp;&nbsp;";
         thing += "<a id=\"button\" onclick=\"loadNameBiomes()\">Back</a>";
+        if (level < modeLength[1]) thing += "&nbsp;&nbsp;<a id=\"button\" onclick=\"loadQuiz(2, " + (level + 1) + ")\">></a>";
     }
     thing += "<br><br>";
     thing += "<p id=\"right\" style=\"color:green;font-size:30px;display:none;\">RIGHT</p>";

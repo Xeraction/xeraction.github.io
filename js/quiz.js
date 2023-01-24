@@ -1,10 +1,10 @@
 const frame = document.getElementById("text-content");
 const storage = window.localStorage;
 
-const modeLength = [72, 46];
+const modeLength = [76, 62];
 
-const nameTheMobAnswers = ["horse", "evoker", "iron golem", "mule", "wandering trader", "enderman", "hoglin", "endermite", "guardian", "elder guardian", "donkey", "phantom", "slime", "cave spider", "villager", "turtle", "drowned", "zombie villager", "killer bunny", "vindicator", "wolf", "polar bear", "ocelot", "strider", "witch", "wither", "zombie horse", "blaze", "illusioner", "rabbit", "sheep", "tropical fish", "stray", "vex", "ender dragon", "piglin brute", "parrot", "bee", "llama", "wither skeleton", "axolotl", "fox", "snow golem", "zoglin", "cow", "pufferfish", "mooshroom", "zombified piglin", "silverfish", "creeper", "pillager", "shulker", "zombie", "husk", "salmon", "glow squid", "piglin", "cat", "skeleton horse", "magma cube", "spider", "ghast", "skeleton", "panda", "squid", "bat", "dolphin", "goat", "chicken", "ravager", "pig", "cod"];
-const nameTheBiomeAnswers = ["flower forest", "tall birch forest", "jungle", "nether wastes", "beach", "stony shore", "frozen river", "lush caves", "badlands", "lukewarm ocean", "savanna", "old growth spruce taiga", "bamboo jungle", "ice spikes", "plains", "mushroom fields", "basalt deltas", "forest", "cold ocean", "swamp", "desert", "dripstone caves", "snowy tundra", "old growth pine taiga", "birch forest", "ocean", "eroded badlands", "windswept forest", "snowy taiga", "soul sand valley", "sparse jungle", "river", "frozen ocean", "windswept savanna", "warped forest", "sunflower plains", "taiga mountains", "snowy beach", "dark forest", "windswept gravelly hills", "taiga", "warm ocean", "wooded badlands", "crimson forest", "windswept hills", "snowy taiga mountains"];
+const nameTheMobAnswers = ["horse", "evoker", "iron golem", "mule", "wandering trader", "enderman", "hoglin", "endermite", "guardian", "elder guardian", "donkey", "phantom", "slime", "cave spider", "villager", "turtle", "drowned", "zombie villager", "killer bunny", "vindicator", "wolf", "polar bear", "ocelot", "strider", "witch", "wither", "zombie horse", "blaze", "illusioner", "rabbit", "sheep", "tropical fish", "stray", "vex", "ender dragon", "piglin brute", "parrot", "bee", "llama", "wither skeleton", "axolotl", "fox", "snow golem", "zoglin", "cow", "pufferfish", "mooshroom", "zombified piglin", "silverfish", "creeper", "pillager", "shulker", "zombie", "husk", "salmon", "glow squid", "piglin", "cat", "skeleton horse", "magma cube", "spider", "ghast", "skeleton", "panda", "squid", "bat", "dolphin", "goat", "chicken", "ravager", "pig", "cod", "allay", "frog", "warden", "tadpole"];
+const nameTheBiomeAnswers = ["deep frozen ocean", "forest", "dripstone caves", "meadow", "stony shore", "grove", "badlands", "ice spikes", "end midlands", "plains", "snowy taiga", "nether wastes", "ocean", "old growth birch forest", "mushroom fields", "mangrove swamp", "lush caves", "lukewarm ocean", "jungle", "jagged peaks", "frozen river", "eroded badlands", "end barrens", "desert", "windswept hills", "bamboo jungle", "basalt deltas", "dark forest", "river", "sparse jungle", "snowy beach", "small end islands", "swamp", "sunflower plains", "windswept savanna", "soul sand valley", "snowy slopes", "wooded badlands", "savanna plateau", "old growth spruce taiga", "crimson forest", "beach", "frozen peaks", "the end", "deep cold ocean", "birch forest", "snowy plains", "savanna", "stony peaks", "old growth pine taiga", "deep dark", "windswept gravelly hills", "frozen ocean", "warped forest", "end highlands", "deep ocean", "flower forest", "warm ocean", "taiga", "deep lukewarm ocean", "windswept forest", "cold ocean"];
 
 const completed = [];
 
@@ -96,7 +96,7 @@ function loadQuiz(mode, level) {
     if (mode === 1) {
         thing += "<h1>Name the Mob</h1>";
         thing += "<h3>Level " + level + "</h3>";
-        thing += "<img src=\"../assets/mcmobs/" + level + ".png\" alt=\"Error\"><br><br><br>";
+        thing += "<img src=\"../assets/mcmobs/" + level + (level > 72 ? ".webp" : ".png") + "\" alt=\"Error\"><br><br><br>";
         thing += "<input type=\"text\" id=\"input\"><br><br><br>";
         if (level > 1) thing += "<a id=\"button\" onclick=\"loadQuiz(1, " + (level - 1) + ")\"><</a>&nbsp;&nbsp;";
         thing += "<a id=\"button\" onclick=\"checkAnswer(1, " + level + ")\">Check</a>&nbsp;&nbsp;";
@@ -105,7 +105,7 @@ function loadQuiz(mode, level) {
     } else if (mode === 2) {
         thing += "<h1>Name the Biome</h1>";
         thing += "<h3>Level " + level + "</h3>";
-        thing += "<img src=\"../assets/mcbiomes/" + level + ".png\" alt=\"Error\"><br><br><br>";
+        thing += "<img src=\"../assets/mcbiomes/" + level + ".webp\" alt=\"Error\"><br><br><br>";
         thing += "<input type=\"text\" id=\"input\"><br><br><br>";
         if (level > 1) thing += "<a id=\"button\" onclick=\"loadQuiz(2, " + (level - 1) + ")\"><</a>&nbsp;&nbsp;";
         thing += "<a id=\"button\" onclick=\"checkAnswer(2, " + level + ")\">Check</a>&nbsp;&nbsp;";
@@ -201,11 +201,11 @@ function loadLevels(title, subtitle, mode, levelCount) {
 }
 
 function loadNameMob() {
-    loadLevels("Name the Mob", "Do you know the name of the shown mob? Type it in the textbox underneath the picture and press check!", 1, 72);
+    loadLevels("Name the Mob", "Do you know the name of the shown mob? Type it in the textbox underneath the picture and press check!", 1, modeLength[0]);
 }
 
 function loadNameBiomes() {
-    loadLevels("Name the Biome", "Do you know the name of the shown biome? Type it in the textbox underneath the picture and press check!", 2, 46);
+    loadLevels("Name the Biome", "Do you know the name of the shown biome? Type it in the textbox underneath the picture and press check!", 2, modeLength[1]);
 }
 
 function main() {

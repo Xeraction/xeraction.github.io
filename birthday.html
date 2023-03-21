@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Birthday</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Birthday. Birthday? Birthday!">
+        <meta name="author" content="Xeraction">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <div id="content">
+            <div id="field">
+                <div id="text-content">
+                    <h1>Check If A Person's Birthday Is Today</h1>
+                    <input id="bIn"><br><br><br>
+                    <a id="button" onclick="check()">Check</a><br><br><br>
+                    <a id="maybe">maybe</a>
+                    <a id="yes">YES</a>
+                </div>
+            </div>
+        </div>
+        <script src="js/main.js"></script>
+        <script>
+            function check() {
+                let input = document.getElementById("bIn").value;
+                if (input.toLowerCase().includes("lorenz")) {
+                    document.getElementById("maybe").style.display = "none";
+                    document.getElementById("yes").style.display = "block";
+                } else {
+                    document.getElementById("maybe").style.display = "block";
+                    document.getElementById("yes").style.display = "none";
+                }
+            }
+        </script>
+    </body>
+    <style>
+        #yes {
+            display: none;
+            font-size: 300px;
+        }
+
+        #maybe {
+            display: none;
+            font-size: 20px;
+        }
+    </style>
+</html>

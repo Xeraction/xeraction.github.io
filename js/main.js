@@ -24,6 +24,7 @@ function addNav() {
     thing += '<a onclick="redirect(\'42\')" id="sidelink">42</a>';
     thing += '<a onclick="redirect(\'lettercode\')" id="sidelink">Lettercode</a>';
     thing += '<a onclick="redirect(\'gol\')" id="sidelink">Game of Life</a>';
+    //thing += '<a onclick="redirect(\'unfolding\')" id="sidelink">Unfolding</a>';
     frame.insertAdjacentHTML("beforeend", thing);
 }
 
@@ -31,7 +32,7 @@ function redirect(page) {
     const path = window.location.pathname;
     const currentPage = path.split("/").pop();
     let projectPage = false;
-    if (currentPage === "quiz.html" || currentPage === "42.html" || currentPage === "lettercode.html" || currentPage === "gol.html") projectPage = true;
+    if (currentPage === "quiz.html" || currentPage === "42.html" || currentPage === "lettercode.html" || currentPage === "gol.html" || currentPage === "unfolding.html") projectPage = true;
     switch (page) {
         case "index":
         case "about":
@@ -41,6 +42,7 @@ function redirect(page) {
         case "quiz":
         case "42":
         case "lettercode":
+        case "unfolding":
         case "gol": window.location.assign("." + (projectPage ? "" : "/projects") + "/" + page + ".html"); break;
         default: window.location.replace("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
     }
@@ -48,16 +50,18 @@ function redirect(page) {
 
 function main() {
     addNav();
-    const field = document.getElementById("field");
-    if (isOverflowing(field)) field.style.overflowY = "scroll";
-    else field.style.overflowY = "hidden";
-
-    //yoinked from colon's furry site
-    let observer = new MutationObserver(() => {
+    if (window.location.pathname.split("/").pop() !== "unfolding.html") {
+        const field = document.getElementById("field");
         if (isOverflowing(field)) field.style.overflowY = "scroll";
-        else field.style.overflow = "hidden";
-    });
-    observer.observe(document.getElementById("text-content"), {childList: true, subtree: true, attributes: true, characterData: true});
+        else field.style.overflowY = "hidden";
+
+        //yoinked from colon's furry site
+        let observer = new MutationObserver(() => {
+            if (isOverflowing(field)) field.style.overflowY = "scroll";
+            else field.style.overflowY = "hidden";
+        });
+        observer.observe(document.getElementById("text-content"), {childList: true, subtree: true, attributes: true, characterData: true});
+    }
     return undefined;
 }
 

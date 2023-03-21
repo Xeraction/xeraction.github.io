@@ -4,7 +4,7 @@ let time = 0;
 let pb = "";
 
 function startGame() {
-    const frame = document.getElementById("game");
+    const frame = document.getElementById("mame");
     frame.innerHTML = "";
     let thing = "";
     num = getRandNum();
@@ -43,8 +43,8 @@ function win() {
         localStorage.setItem("42pb", pb);
         document.getElementById("pb").innerHTML = "Personal best: " + pb;
     }
-    document.getElementById("game").insertAdjacentHTML("beforebegin", "<a id=\"win\" style=\"font-size:42px;color:green;\">WIN</a>");
-    document.getElementById("game").insertAdjacentHTML("beforeend", "<br><br><br><a id=\"button\" onclick=\"reset()\">Done</a>");
+    document.getElementById("mame").insertAdjacentHTML("beforebegin", "<a id=\"win\" style=\"font-size:42px;color:green;\">WIN</a>");
+    document.getElementById("mame").insertAdjacentHTML("beforeend", "<br><br><br><a id=\"button\" onclick=\"reset()\">Done</a>");
 }
 
 function isNewPB(newPB) {
@@ -63,7 +63,7 @@ function isNewPB(newPB) {
 }
 
 function reset() {
-    document.getElementById("game").innerHTML = "<br><br><a id=\"button\" onclick=\"startGame()\">Start</a>";
+    document.getElementById("mame").innerHTML = "<br><br><a id=\"button\" onclick=\"startGame()\">Start</a>";
     document.getElementById("win").remove();
     num = -1;
     befNum = -1;
@@ -138,7 +138,7 @@ function getCrossSum(aNum) {
 function update(op) {
     document.getElementById("randNum").innerHTML = num;
     document.getElementById("lastOp").innerHTML = op;
-    if (num === 45) document.getElementById("game").insertAdjacentHTML("beforeend", "<a class=\"button\" id=\"removeMe\" onclick=\"sub3()\">Subtract 3</a>");
+    if (num === 45) document.getElementById("mame").insertAdjacentHTML("beforeend", "<a class=\"button\" id=\"removeMe\" onclick=\"sub3()\">Subtract 3</a>");
     else if (document.getElementById("removeMe")) document.getElementById("removeMe").remove();
     if (num === 42) win();
     befNum = num;

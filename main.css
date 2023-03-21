@@ -25,13 +25,11 @@ p {
 
 #field {
     background-image: linear-gradient(to top, #8c8c8c, #e8e6e6);
-    padding-bottom: 15px;
     position: relative;
     width: 90%;
     height: 86%;
     overflow-y: scroll;
     overflow-x: hidden;
-    //box-shadow: 5px 5px 5px rgba(0, 0, 0, .5);
     border-radius: 1px;
     border-color: black;
     border-style: solid;
@@ -182,8 +180,139 @@ p {
     text-decoration: underline;
 }
 
+#game {
+    display: flex;
+    overflow-y: hidden;
+}
+
+#nodes {
+    padding: 1% 1% 0;
+    width: 100%;
+    border-color: black;
+    border-style: solid;
+    color: black;
+    transition: 0.1s;
+    overflow-x: hidden;
+}
+
+#discoveries {
+    width: 0;
+    height: 798px;
+    background-color: #795b36;
+    display: none;
+    transition: 0.1s;
+    text-align: center;
+    color: #e3d990;
+    font-family: helvetica;
+    padding-bottom: 1%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.node {
+    border-color: #5d5d5d;
+    border-radius: 1px;
+    border-style: solid;
+    font-size: 20px;
+    font-family: helvetica;
+    color: black;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    position: relative;
+}
+
+.plus {
+    border-color: black;
+    border-radius: 1px;
+    border-style: solid;
+    width: 10%;
+    height: 90%;
+    color: black;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.tab {
+    border-radius: 1px;
+    border-style: solid;
+    color: #e3d990;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.tab:hover {
+    background-color: #644c2d;
+}
+
+.tab:active {
+    background-color: #44311d;
+
+}
+
+.tab-active {
+    border-color: #cc9147;
+}
+
+.tab-inactive {
+    border-color: #936d3f;
+}
+
+.plus:hover {
+    background-color: #bdbdbd;
+}
+
+.plus:active {
+    background-color: #a9a9a9;
+}
+
+#section_h {
+    color: #e3d990;
+    font-size: 25px;
+}
+
+.discovery {
+    position: relative;
+}
+
+.disc-icon {
+    border-color: #b77d2e;
+    border-radius: 1px;
+    border-style: solid;
+    font-size: 30px;
+    padding: 5px;
+    cursor: pointer;
+    display: block;
+    width: 42px;
+}
+
+.tooltip {
+    position: absolute;
+    background-color: rgba(72, 55, 35, 0.9);
+    border-radius: 4px;
+    color: white;
+    padding: 10px;
+    font-size: 15px;
+    width: 130px;
+    z-index: 5;
+    cursor: default;
+    transition: opacity 0.25s ease-out;
+    bottom: 130%;
+}
+
 .shaking {
     animation: .8s shake infinite alternate;
+}
+
+.locked-disc {
+    border-color: #4f1f1f;
+    border-radius: 1px;
+    border-style: solid;
+    font-size: 30px;
+    padding: 5px;
+    display: block;
+    width: 42px;
+    cursor: pointer;
 }
 
 @keyframes shake {

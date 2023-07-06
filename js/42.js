@@ -2,6 +2,7 @@ let num = -1;
 let befNum = -1;
 let time = 0;
 let pb = "";
+let usedMinus3 = false;
 
 function startGame() {
     const frame = document.getElementById("mame");
@@ -43,7 +44,11 @@ function win() {
         localStorage.setItem("42pb", pb);
         document.getElementById("pb").innerHTML = "Personal best: " + pb;
     }
-    document.getElementById("mame").insertAdjacentHTML("beforebegin", "<a id=\"win\" style=\"font-size:42px;color:green;\">WIN</a>");
+    if (!usedMinus3) {
+        document.getElementById("mame").insertAdjacentHTML("beforebegin", "<a id=\"win\" style=\"font-size:42px;color:green;\">REAL WIN<br><a id=\"winMsg\" style='font-size:21px;color:green;'>Congratulations!</a></a>");
+    } else {
+        document.getElementById("mame").insertAdjacentHTML("beforebegin", "<a id=\"win\" style=\"font-size:42px;color:green;\">WIN<br><a id=\"winMsg\" style='font-size:21px;color:green;'>Now can you do it without the -3 button?</a></a>");
+    }
     document.getElementById("mame").insertAdjacentHTML("beforeend", "<br><br><br><a id=\"button\" onclick=\"reset()\">Done</a>");
 }
 
@@ -65,8 +70,10 @@ function isNewPB(newPB) {
 function reset() {
     document.getElementById("mame").innerHTML = "<br><br><a id=\"button\" onclick=\"startGame()\">Start</a>";
     document.getElementById("win").remove();
+    document.getElementById("winMsg").remove();
     num = -1;
     befNum = -1;
+    usedMinus3 = false;
 }
 
 function double() {
@@ -122,6 +129,7 @@ function subCross() {
 
 function sub3() {
     num -= 3;
+    usedMinus3 = true;
     update("-3");
 }
 

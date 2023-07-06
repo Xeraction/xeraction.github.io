@@ -32,7 +32,7 @@ function redirect(page) {
     const path = window.location.pathname;
     const currentPage = path.split("/").pop();
     let projectPage = false;
-    if (currentPage === "quiz.html" || currentPage === "42.html" || currentPage === "lettercode.html" || currentPage === "gol.html" || currentPage === "unfolding.html") projectPage = true;
+    if (currentPage === "quiz.html" || currentPage === "42.html" || currentPage === "lettercode.html" || currentPage === "gol.html" /*|| currentPage === "unfolding.html"*/) projectPage = true;
     switch (page) {
         case "index":
         case "about":
@@ -42,7 +42,7 @@ function redirect(page) {
         case "quiz":
         case "42":
         case "lettercode":
-        case "unfolding":
+        //case "unfolding":
         case "gol": window.location.assign("." + (projectPage ? "" : "/projects") + "/" + page + ".html"); break;
         default: window.location.replace("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
     }

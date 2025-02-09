@@ -70,6 +70,7 @@ p {
     display: block;
     cursor: pointer;
     transition: 0.2s;
+    overflow: hidden;
 }
 
 #sidelink:hover {
@@ -82,6 +83,7 @@ p {
     font-family: Georgia, 'Times New Roman', Times, serif;
     color: #093cd2;
     font-weight: bold;
+    overflow: hidden;
 }
 
 #closesidenav {

@@ -23,7 +23,6 @@ function runCode() {
     } catch (err) {
         console.error(err);
     }
-    console.log(jsonCode);
 
     //run the generated json (maybe make feature to export to json file but idk if it's worth it, what do you think?)
     try {

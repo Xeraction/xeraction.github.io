@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AD Save Editor</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Hey, kid, over here. You want some free STDs?">
+    <meta name="author" content="Xeraction">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./main.css">
+</head>
+<body>
+<div id="sidenav"></div>
+<a id="opensidenav" onclick="openNav()">&#9776;</a>
+<div id="content">
+    <div id="field">
+        <div id="text-content">
+            <h1>Antimatter Dimensions Save Editor</h1>
+            <p>Are you like me and absolutely hate playing a game normally?</p>
+            <p>Can you not resist the urge to break the experience the developers<br>so carefully crafted to be as perfect as it can be?</p>
+            <p>Then you have come to the right place.<br>Here, you have power over everything.</p>
+            <p>Cannot pass the threshold to the next galaxy? No problem!<br>Not enough Time Theorems for the next study? We've got you covered.<br>Cannot get that one challenge time low enough? Well, it is now!</p>
+            <p>Copy your save into the box below to start cheating!</p>
+            <textarea id="saveinput"></textarea><br><br><br>
+            <a id="start" class="button" onclick="decodeSave()">Decode Save</a>
+            <p id="error" style="color:#ca0000;"></p>
+        </div>
+    </div>
+</div>
+<script src="./js/main.js"></script>
+<script src="./js/adsave.js"></script>
+<script src="./js/pako.js"></script>
+</body>
+</html>
